@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# curl https://raw.githubusercontent.com/v-popov/window-collage/camera/setup1.sh -o setup1.sh
+# yes | sudo bash setup1.sh
+
 yes | sudo apt update && sudo apt upgrade
 yes | sudo rpi-update
 
