@@ -1,4 +1,4 @@
-# curl https://raw.githubusercontent.com/v-popov/window-collage/camera/setup2.sh -o setup1.sh
+# curl https://raw.githubusercontent.com/v-popov/window-collage/camera/setup2.sh -o setup2.sh
 # yes | sudo bash setup2.sh
 
 echo "*/7 * * * * /bin/bash -l -exec '${CAMERA_DIR}take_photo.sh'" >/etc/cron.d/take_photo
