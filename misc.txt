@@ -7,6 +7,9 @@ Transfer file from Pi to PC:
 scp pi@192.168.1.229:/home/some_dir/file.txt path_on_local_pc
 
 
+curl https://raw.githubusercontent.com/v-popov/window-collage/camera/setup.sh -o ./setup.sh
+yes | sudo bash setup.sh
+
 # Camera
 
 sudo rpi-update
