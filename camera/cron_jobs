@@ -1,0 +1,2 @@
+*/7 * * * * /bin/bash -l -exec 'sudo ${CAMERA_DIR}take_photo.sh >> ${CAMERA_DIR}log_photo.txt 2>&1'
+*/10 * * * *  /bin/bash -l -exec 'sudo /usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py >> ${CAMERA_DIR}log_dropbox.txt 2>&1'
