@@ -15,7 +15,7 @@ sudo mv ./env_vars.sh /etc/profile.d/
 
 yes | sudo apt install git
 echo git --version
-cd projects/camera
+cd projects
 sudo git clone -b camera https://github.com/v-popov/window-collage.git
 mkdir photos
 
