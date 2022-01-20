@@ -16,16 +16,15 @@ echo git --version
 cd projects
 git clone -b camera https://github.com/v-popov/window-collage.git
 mkdir window-collage/camera/photos
+chmod +x ${CAMERA_DIR}take_photo.sh
 
 yes | sudo apt install python3-pip
+pip install -r ${CAMERA_DIR}requirements.txt
 
 EDITOR=nano crontab -e
 
-# (crontab -l ; echo "0 * * * * $CAMERA_DIR/take_photo.sh")| crontab -
-# (crontab -l ; echo "10 * * * * /bin/bash -l -exec "/usr/bin/python3 $CAMERA_DIR/dropbox_uploader.py"")| crontab -
-
-(crontab -l ; echo "*/1 * * * * ${CAMERA_DIR}take_photo.sh $CAMERA_DIR > ${CAMERA_DIR}log_photo.txt 2>&1")| crontab -
-(crontab -l ; echo "*/10 * * * * /usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py > ${CAMERA_DIR}log_dropbox.txt 2>&1")| crontab -
+(crontab -l ; echo "0 * * * * ${CAMERA_DIR}take_photo.sh $CAMERA_DIR > ${CAMERA_DIR}log_photo.txt 2>&1")| crontab -
+(crontab -l ; echo "5 * * * * /usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py > ${CAMERA_DIR}log_dropbox.txt 2>&1")| crontab -
 
 #echo "*/7 * * * * /bin/bash -l -exec '${CAMERA_DIR}take_photo.sh >> ${CAMERA_DIR}log_photo.txt 2>&1'" >/etc/cron.d/take_photo
 #echo "*/10 * * * *  /bin/bash -l -exec '/usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py >> ${CAMERA_DIR}log_dropbox.txt 2>&1'" >/etc/cron.d/dropbox_uploader
