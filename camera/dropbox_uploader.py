@@ -8,7 +8,7 @@ DROPBOX_SECOND_HALF_TOKEN_URL = 'https://raw.githubusercontent.com/v-popov/windo
 if __name__ == '__main__':
     resp = requests.get(DROPBOX_SECOND_HALF_TOKEN_URL)
     data = json.loads(resp.text)
-    dbx = dropbox.Dropbox(f"{os.environ['FIRST_HALF_TOKEN']}{data['half-token']}")
+    dbx = dropbox.Dropbox(f"{os.environ['DROPBOX_FIRST_HALF_TOKEN']}{data['half-token']}")
 
     project_abs_path = os.environ['CAMERA_DIR']
     photos_filenames = os.listdir(f"{project_abs_path}/photos/")
