@@ -1,1 +1,0 @@
-*/10 * * * *  /bin/bash -l -exec 'sudo /usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py >> ${CAMERA_DIR}log_dropbox.txt 2>&1'
