@@ -24,7 +24,7 @@ pip install -r ${CAMERA_DIR}requirements.txt
 EDITOR=nano crontab -e
 
 (crontab -l ; echo "0 * * * * ${CAMERA_DIR}take_photo.sh $CAMERA_DIR > ${CAMERA_DIR}log_photo.txt 2>&1")| crontab -
-(crontab -l ; echo "5 * * * * /usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py > ${CAMERA_DIR}log_dropbox.txt 2>&1")| crontab -
+(crontab -l ; echo "5 * * * * /usr/bin/python3 ${CAMERA_DIR}dropbox_uploader.py --first_half_dropbox_token=$DROPBOX_FIRST_HALF_TOKEN --camera_directory=$CAMERA_DIR > ${CAMERA_DIR}log_dropbox.txt 2>&1")| crontab -
 
 sudo raspi-config
 
