@@ -6,10 +6,17 @@ import dropbox
 import json
 import requests
 import os
+import argparse
+
+parser = argparse.ArgumentParser(description='''Dropbox Uploader Script Arguments''', formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('-fhdt', '--first_half_dropbox_token', default='', type=str, help='''First Half Dropbox Token''')
 
 DROPBOX_SECOND_HALF_TOKEN_URL = 'https://raw.githubusercontent.com/v-popov/window-collage/main/dropbox_half_token.json'
 
 if __name__ == '__main__':
+    args = parser.parse_args()
+    first_half_token = args.first_half_dropbox_token
+
     resp = requests.get(DROPBOX_SECOND_HALF_TOKEN_URL)
     data = json.loads(resp.text)
 
