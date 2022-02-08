@@ -2,6 +2,8 @@
 
 yes | sudo apt update && sudo apt upgrade
 
+sudo apt-get install gifsicle
+
 mkdir projects
 
 touch ./env_vars.sh
@@ -14,6 +16,8 @@ yes | sudo apt install git
 echo git --version
 cd projects
 git clone -b server https://github.com/v-popov/window-collage.git
+
+mkdir ${SERVER_DIR}photos
 
 yes | sudo apt install python3-pip
 pip install -r ${SERVER_DIR}requirements.txt
