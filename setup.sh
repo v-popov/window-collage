@@ -5,6 +5,7 @@ yes | sudo apt update && sudo apt upgrade
 sudo apt-get install gifsicle
 
 yes | sudo apt-get install libatlas-base-dev
+yes | sudo apt-get install libopenjp2-7-dev
 
 mkdir projects
 
