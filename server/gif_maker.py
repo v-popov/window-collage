@@ -3,10 +3,9 @@ import argparse
 import json
 import requests
 import os
-import imageio
 from datetime import datetime, timedelta
-# pip install pygifsicle
-from pygifsicle import optimize
+import subprocess
+
 DROPBOX_SECOND_HALF_TOKEN_URL = 'https://raw.githubusercontent.com/v-popov/window-collage/main/dropbox_half_token.json'
 
 parser = argparse.ArgumentParser(description='''Dropbox Uploader Script Arguments''', formatter_class=argparse.RawTextHelpFormatter)
@@ -38,14 +37,22 @@ if __name__ == '__main__':
                 local_name = photo_name.replace(':','-')
                 downloaded_file = dbx.files_download_to_file(f'{project_abs_path}/photos/{local_name}', f'/organized_photos/{date}/{photo_name}')
 
-    filenames_to_gif = os.listdir(f'{project_abs_path}/photos/')
-    print(filenames_to_gif)
-    gif_path = f"{project_abs_path}/{end_date.strftime('%Y-%m-%d')}-collage.gif"
-    with imageio.get_writer(gif_path, mode='I') as writer:
-        for filename in filenames_to_gif:
-            image = imageio.imread(f'{project_abs_path}/photos/{filename}')
-            writer.append_data(image)
-    optimize(gif_path)
+    #filenames_to_gif = os.listdir(f'{project_abs_path}/photos/')
+    gif_name = f"{end_date.strftime('%Y-%m-%d')}-collage.gif"
+
+    s = subprocess.getstatusoutput(f"ffmpeg -framerate 30 -pattern_type glob -i '{project_abs_path}/photos/*.jpg' -vf scale=512:-1 {project_abs_path}/{gif_name = f"{end_date.strftime('%Y-%m-%d')}-collage.gif"
+    gif_path}")
+    # with imageio.get_writer(gif_path, mode='I') as writer:
+    #     for i, filename in enumerate(filenames_to_gif, start=1):
+    #         print(f'Gif creation: Processed {i}/{len(filenames_to_gif)} photos')
+    #         image = imageio.imread(f'{project_abs_path}/photos/{filename}')
+    #         writer.append_data(image)
+    # print('Optimizing the GIF')
+    # optimize(gif_path)
+
+    with open(gif_path, "rb") as gif:
+        file = gif.read()
+        dbx.files_upload(file, f'/gifs/{gif_name}')
 
 
 # user_input = '20210115 20210119'
