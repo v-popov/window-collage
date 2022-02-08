@@ -15,27 +15,35 @@ parser.add_argument('-sd', '--server_directory', default='', type=str, help='''S
 
 
 if __name__ == '__main__':
-    dbx = dropbox.Dropbox(f"DM89k7WB5lIAAAAAAAAAARh4mBK_-89GUqiQ9GQf-CJPUHmLq7BYT6SZdMDHwyBY")
+    args = parser.parse_args()
+    first_half_token = args.first_half_dropbox_token
+
+    resp = requests.get(DROPBOX_SECOND_HALF_TOKEN_URL)
+    data = json.loads(resp.text)
+
+    dbx = dropbox.Dropbox(f"{first_half_token}{data['half-token']}")
 
     organized_photos_existing_folders = dbx.files_list_folder('/organized_photos/').entries
     organized_photos_existing_folders = [content.name for content in organized_photos_existing_folders]
 
     end_date = datetime.now()
+    project_abs_path = args.server_directory
     for delta_days in range(7, 0, -1):
+        print(f'Processing T-{delta_days} day')
         date = (end_date - timedelta(days=delta_days)).strftime('%Y-%m-%d')
         if date in organized_photos_existing_folders:
             photos_names = dbx.files_list_folder(f'/organized_photos/{date}').entries
             photos_names = [content.name for content in photos_names]
             for photo_name in photos_names:
                 local_name = photo_name.replace(':','-')
-                downloaded_file = dbx.files_download_to_file(f'./photos/{local_name}', f'/organized_photos/{date}/{photo_name}')
+                downloaded_file = dbx.files_download_to_file(f'{project_abs_path}/photos/{local_name}', f'/organized_photos/{date}/{photo_name}')
 
-    filenames_to_gif = os.listdir('./photos/')
+    filenames_to_gif = os.listdir(f'{project_abs_path}/photos/')
     print(filenames_to_gif)
-    gif_path = f"./{end_date.strftime('%Y-%m-%d')}-collage.gif"
+    gif_path = f"{project_abs_path}/{end_date.strftime('%Y-%m-%d')}-collage.gif"
     with imageio.get_writer(gif_path, mode='I') as writer:
         for filename in filenames_to_gif:
-            image = imageio.imread(f'./photos/{filename}')
+            image = imageio.imread(f'{project_abs_path}/photos/{filename}')
             writer.append_data(image)
     optimize(gif_path)
 
