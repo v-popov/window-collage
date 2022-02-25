@@ -28,5 +28,6 @@ pip install -r ${SERVER_DIR}requirements.txt
 EDITOR=nano crontab -e
 
 (crontab -l ; echo "10 * * * * /usr/bin/python3 ${SERVER_DIR}dropbox_reorganizer.py --first_half_dropbox_token=$DROPBOX_FIRST_HALF_TOKEN > ${SERVER_DIR}log_dropbox.txt 2>&1")| crontab -
+(crontab -l ; echo "0 4 * * 0 /usr/bin/python3 ${SERVER_DIR}gif_maker.py --first_half_dropbox_token=$DROPBOX_FIRST_HALF_TOKEN --server_directory=$SERVER_DIR > ${SERVER_DIR}log_gif_maker.txt 2>&1")| crontab -
 
 sudo reboot
