@@ -85,7 +85,7 @@ if __name__ == '__main__':
     image_length = int(get_service_params(service_info, 'image_length_'))
     image_width = int(get_service_params(service_info, 'image_width_'))
     num_days_per_gif = int(get_service_params(service_info, 'num_days_per_gif_'))
-    print(f'Service Parameters: duration={duration}; image_length={image_length}; image_width={image_width}')
+    print(f'Service Parameters: duration={duration}; image_length={image_length}; image_width={image_width}; num_days_per_gif={num_days_per_gif}')
 
     start_folder_num = 0
     not_all_folders_processed = True
