@@ -113,6 +113,7 @@ if __name__ == '__main__':
                 not_all_folders_processed = False
         start_folder_num += delta_days + 1
         filenames_to_gif = os.listdir(f'{project_abs_path}/photos/')
+        filenames_to_gif = sorted(filenames_to_gif)
         gif_name = f"{last_gif_date.strftime('%Y-%m-%d')}-collage.gif"
         gif_path = f"{project_abs_path}/{gif_name}"
 
